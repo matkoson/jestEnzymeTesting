@@ -3,5 +3,5 @@ import commentsReducer from "reducers/comments";
 
 
 export default combineReducers({
-  comment: commentsReducer
+  comments: commentsReducer
 });

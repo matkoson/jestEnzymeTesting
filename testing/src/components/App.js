@@ -7,8 +7,8 @@ export default () => {
 return (
 <div>
   Im the app content
-  <CommentList />
   <CommentBox />
+  <CommentList />
 </div>
 );
 };
