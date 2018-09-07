@@ -8,6 +8,7 @@ class CommentList extends Component {
   //   });
   // }
   renderList(props) {
+    console.log(this.props.comments);
     return this.props.comments
     .map(one => {
       return (
