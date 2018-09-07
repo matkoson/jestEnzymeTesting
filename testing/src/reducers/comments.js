@@ -7,6 +7,7 @@ export default function(state = [], action) {
     case SAVE_COMMENT:
     return [...state, action.payload];
     case FETCH_COMMENTS:
+    console.log(action);
     const singleComm = _.map(action.payload.data, (single)=> {
       return {name: single.name, id: single.id}
     });
