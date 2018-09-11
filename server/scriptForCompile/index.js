@@ -5,7 +5,10 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 const app = express();
 import router from "./router";
+import mongoose from "mongoose";
 
+//DB SETUP
+mongoose.connect("mongodb://localhost:auth/auth", {useNewUrlParser: true });
 
 //APP SETUP
 app.use(morgan("combined"));

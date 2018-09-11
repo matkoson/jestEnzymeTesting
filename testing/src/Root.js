@@ -10,10 +10,10 @@ import stateValidator from "middlewares/stateValidator";
 
 
 export default ({children, initialState = {}})=> {
-  const store = createStore(reducers, initialState, applyMiddleware(async, stateValidator));
-  return(
-    <Provider store={store}>
-      {children}
-    </Provider>
-  );
+	const store = createStore(reducers, initialState, applyMiddleware(async, stateValidator));
+	return(
+		<Provider store={store}>
+			{children}
+		</Provider> 
+	);
 };

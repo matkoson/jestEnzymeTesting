@@ -1,6 +1,5 @@
-export default (app)=> {
-  app.get("/", (req, res, next)=> {
-    console.log("got it");
-    return res.send(["lolololo"]);
-  })
+import {signup} from "./controllers/authentication";
+
+export default(app) => {
+	app.post("/signup", signup);
 };

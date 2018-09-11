@@ -5,11 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _authentication = require("./controllers/authentication");
+
 var _default = function _default(app) {
-  app.get("/", function (req, res, next) {
-    console.log("got it");
-    return res.send(["lolololo"]);
-  });
+  app.post("/signup", _authentication.signup);
 };
 
 exports.default = _default;

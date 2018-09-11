@@ -5,22 +5,44 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _mongoose = _interopRequireWildcard(require("mongoose"));
+var _mongoose = _interopRequireDefault(require("mongoose"));
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+var _bcryptNodejs = _interopRequireDefault(require("bcrypt-nodejs"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //DEFINING A MODEL
-var userSchema = new _mongoose.Schema({
+var userSchema = new _mongoose.default.Schema({
   email: {
     type: String,
     unique: true,
     lowercase: true
   },
   password: String
+}); //ON SAVE HOOK, ENCRYPT PASSWORD
+
+userSchema.pre("save", function (next) {
+  var _this = this;
+
+  _bcryptNodejs.default.genSalt(10, function (err, salt) {
+    if (err) {
+      return next(err);
+    }
+
+    _bcryptNodejs.default.hash(_this.password, salt, null, function (err, hash) {
+      if (err) {
+        return next(err);
+      }
+
+      console.log(hash, _this.password);
+      _this.password = hash;
+      next();
+    });
+  });
 }); //CRT A MODEL class
 
-var modelClass = _mongoose.default.model("user", userSchema); //export THE MODEL
+var ModelClass = _mongoose.default.model.call(_mongoose.default, "user", userSchema); //export THE MODEL
 
 
-var _default = modelClass;
+var _default = ModelClass;
 exports.default = _default;
