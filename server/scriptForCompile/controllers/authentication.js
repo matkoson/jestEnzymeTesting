@@ -4,7 +4,13 @@ import config from "../config";
 
 function tokenForUser(user) {
 	const timestamp = new Date().getTime();
-	return jwt.encode({}, config.secret);
+	return jwt.encode({sub: user.id, iat: timestamp}, config.secret);
+}
+
+export function signin(req, res, next) {
+	//USER HAS ALREADY HAD THEIR email&&passwd AUTH'D
+	//I NEED TO JUST GIVE THEM A TOKEN
+	res.send({token: tokenForUser(req.user)});
 }
 
 export function signup(req, res, next) {

@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.signin = signin;
 exports.signup = signup;
 
 var _user = _interopRequireDefault(require("../models/user"));
@@ -15,7 +16,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function tokenForUser(user) {
   var timestamp = new Date().getTime();
-  return _jwtSimple.default.encode({}, _config.default.secret);
+  return _jwtSimple.default.encode({
+    sub: user.id,
+    iat: timestamp
+  }, _config.default.secret);
+}
+
+function signin(req, res, next) {
+  //USER HAS ALREADY HAD THEIR email&&passwd AUTH'D
+  //I NEED TO JUST GIVE THEM A TOKEN
+  res.send({
+    token: tokenForUser(req.user)
+  });
 }
 
 function signup(req, res, next) {

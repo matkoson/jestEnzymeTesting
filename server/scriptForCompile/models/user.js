@@ -24,6 +24,16 @@ userSchema.pre("save", function(next) {
 	});
 });
 
+userSchema.methods.comparePassword =
+function comparision(candidatePasswd, cb) {
+	bcrypt.compare(candidatePasswd, this.password,
+		function matcher(err, isMatch) {
+			if(err) {return cb(err);}
+
+			cb(null, isMatch); 
+		});
+};
+
 
 
 //CRT A MODEL class

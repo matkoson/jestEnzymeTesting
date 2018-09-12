@@ -39,7 +39,18 @@ userSchema.pre("save", function (next) {
       next();
     });
   });
-}); //CRT A MODEL class
+});
+
+userSchema.methods.comparePassword = function comparision(candidatePasswd, cb) {
+  _bcryptNodejs.default.compare(candidatePasswd, this.password, function matcher(err, isMatch) {
+    if (err) {
+      return cb(err);
+    }
+
+    cb(null, isMatch);
+  });
+}; //CRT A MODEL class
+
 
 var ModelClass = _mongoose.default.model.call(_mongoose.default, "user", userSchema); //export THE MODEL
 
