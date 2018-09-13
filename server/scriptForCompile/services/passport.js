@@ -48,29 +48,6 @@ const jwtLogin = new JwTStrategy(jwtOptions, (payload, done)=> {
 		}
 	});
 });
+//TELL PASSPORT TO USE THIS STRATEGY
 passport.use(jwtLogin);
 passport.use(localLogin);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//TELL PASSPORT TO USE THIS STRATEGY
